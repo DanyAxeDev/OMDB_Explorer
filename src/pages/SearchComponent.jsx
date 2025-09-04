@@ -19,7 +19,7 @@ const SearchComponent = () => {
         try {
             setLoading(true)
             setError(null)
-            const response = await fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=${movieName}&page=${page}`)
+            const response = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&s=${movieName}&page=${page}`)
 
             if (!response.ok) {
                 throw new Error("Falha na requisição")
