@@ -1,0 +1,856 @@
+/* Reset e variáveis CSS */
+:root {
+  --primary-color: #6366f1;
+  --primary-dark: #4f46e5;
+  --secondary-color: #f59e0b;
+  --accent-color: #ec4899;
+  --background: #0f172a;
+  --surface: #1e293b;
+  --surface-light: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --border: #475569;
+  --success: #10b981;
+  --error: #ef4444;
+  --warning: #f59e0b;
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, var(--background) 0%, #1e1b4b 100%);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+/* Estilos para botões de favoritos */
+.favorite-btn {
+  background: transparent;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.favorite-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  transform: scale(1.05);
+}
+
+.favorite-btn.favorited {
+  background: linear-gradient(135deg, var(--accent-color), #be185d);
+  border-color: var(--accent-color);
+  color: white;
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+}
+
+.favorite-btn.favorited:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+}
+
+/* Botão de favoritos na página de detalhes */
+.details-favorite-btn {
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  min-width: auto;
+  height: auto;
+  gap: 0.5rem;
+}
+
+/* Ações do filme */
+.movie-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Header de detalhes com ações */
+.details-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Controles de favoritos */
+.favs-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 1rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.favs-stats {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, var(--error), #dc2626);
+  border-color: var(--error);
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
+}
+
+/* Estado vazio de favoritos */
+.empty-favorites {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.empty-state {
+  text-align: center;
+  max-width: 400px;
+  padding: 2rem;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.empty-state h3 {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.empty-state p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Botão ativo na navegação */
+.nav-buttons .btn.active {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  border-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+/* Responsividade para botões de favoritos */
+@media (max-width: 768px) {
+  .movie-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .details-header-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .favs-controls {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* Container principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header e navegação */
+.header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.header p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* Container de input */
+.inputContainer {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Linha de busca com input e botão lado a lado */
+.search-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.search {
+  flex: 1;
+  padding: 1.25rem 1.5rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: var(--transition);
+  outline: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.search:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  transform: translateY(-2px);
+}
+
+.search::placeholder {
+  color: var(--text-muted);
+}
+
+/* Botões */
+.buttonSearch,
+.btn {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.buttonSearch:hover,
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+}
+
+.buttonSearch:active,
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Botão de busca específico */
+.buttonSearch {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: none;
+  white-space: nowrap;
+  min-width: 120px;
+}
+
+/* Botão de próxima página */
+.nextPageBtn {
+  background: linear-gradient(135deg, var(--secondary-color), #d97706);
+  margin-top: 1rem;
+}
+
+.nextPageBtn:hover {
+  background: linear-gradient(135deg, #d97706, var(--secondary-color));
+}
+
+/* Paginação */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.pagination-btn {
+  min-width: 140px;
+  padding: 0.875rem 1.5rem;
+}
+
+.prev-btn {
+  background: linear-gradient(135deg, var(--surface-light), var(--border));
+  color: var(--text-secondary);
+}
+
+.prev-btn:hover {
+  background: linear-gradient(135deg, var(--border), var(--surface-light));
+  color: var(--text-primary);
+}
+
+.next-btn {
+  background: linear-gradient(135deg, var(--secondary-color), #d97706);
+}
+
+.next-btn:hover {
+  background: linear-gradient(135deg, #d97706, var(--secondary-color));
+}
+
+.page-info {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  background: var(--surface-light);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+/* Lista de filmes */
+.movieList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Card de filme */
+.movie-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.movie-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
+}
+
+/* Container da imagem com altura fixa para evitar layout shift */
+.movie-poster-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: var(--surface-light);
+}
+
+.movie-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.movie-poster.loaded {
+  opacity: 1;
+}
+
+.movie-poster.loading {
+  opacity: 0;
+}
+
+.movie-card:hover .movie-poster.loaded {
+  transform: scale(1.05);
+}
+
+/* Placeholder para loading e erro */
+.movie-poster-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-light);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  gap: 1rem;
+}
+
+/* Placeholder específico para quando não há imagem */
+.no-image-placeholder {
+  background: linear-gradient(135deg, var(--surface-light), var(--surface));
+  border: 2px dashed var(--border);
+}
+
+.no-image-placeholder .image-icon {
+  font-size: 3rem;
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+}
+
+.no-image-placeholder span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.loading-placeholder {
+  background: linear-gradient(45deg, var(--surface) 25%, var(--surface-light) 25%, var(--surface-light) 50%, var(--surface) 50%, var(--surface) 75%, var(--surface-light) 75%);
+  background-size: 20px 20px;
+  animation: loading-stripe 1.5s linear infinite;
+}
+
+.error-placeholder {
+  background: var(--surface);
+  border: 2px dashed var(--border);
+}
+
+.error-placeholder span {
+  font-size: 2rem;
+  opacity: 0.7;
+}
+
+/* Loading spinner pequeno para imagens */
+.loading-spinner-small {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes loading-stripe {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 20px 20px;
+  }
+}
+
+.movie-info {
+  padding: 1.5rem;
+}
+
+.movie-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.movie-year {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.movie-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.movie-link:hover {
+  color: var(--accent-color);
+  transform: translateX(4px);
+}
+
+/* Página de detalhes */
+.details-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.details-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.details-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.details-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Container do poster na página de detalhes */
+.details-poster-container {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface-light);
+}
+
+.details-poster {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.details-poster.loaded {
+  opacity: 1;
+  position: static;
+}
+
+.details-poster.loading {
+  opacity: 0;
+}
+
+.details-poster-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-light);
+  color: var(--text-muted);
+  font-size: 1rem;
+  gap: 1rem;
+  border-radius: var(--radius-lg);
+}
+
+.details-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.details-section {
+  background: var(--surface);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.details-section h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.details-section p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Página de favoritos */
+.favs-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.favs-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.favs-description {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Estados de loading e erro */
+.loading,
+.error {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.loading {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+}
+
+.error {
+  color: var(--error);
+  font-size: 1.1rem;
+}
+
+/* Loading spinner elegante */
+.loading-spinner {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--surface-light);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s ease-in-out infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mensagem de estado inicial */
+.initial-state {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.initial-state h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.initial-state p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 0.5rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .details-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .movieList {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .inputContainer {
+    max-width: 100%;
+  }
+
+  .search-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .search,
+  .buttonSearch {
+    border-radius: var(--radius);
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.75rem;
+  }
+
+  .movieList {
+    grid-template-columns: 1fr;
+  }
+
+  .search,
+  .buttonSearch {
+    padding: 1rem;
+  }
+
+  .pagination-btn {
+    min-width: 120px;
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.movie-card,
+.details-container,
+.favs-container {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Efeitos de hover adicionais */
+.movie-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  opacity: 0;
+  transition: var(--transition);
+  z-index: -1;
+}
+
+.movie-card:hover::before {
+  opacity: 0.1;
+}
+
+/* Melhorias para botões de navegação */
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+/* Estilos para listas */
+.details-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.details-section li {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.details-section li:last-child {
+  border-bottom: none;
+}
+
+/* Estilos para strong tags */
+.details-section strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Melhorias para imagens de erro */
+.error-image {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1rem;
+  opacity: 0.7;
+}
